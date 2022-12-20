@@ -60,7 +60,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 
 					<td th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}"></td>	
 						
-					<td class="text-end">
+					<td class="text-end" sec:authorize="hasRole('ADMIN')">
 						<a th:href="@{/admin/peliculas/{id}/editar(id=*{id})}">Editar</a>
 						
 						<a href="javascript:void(0)" class="text-danger ms-3" th:onclick="'eliminarPelicula(' + *{id} +')'">Eliminar</a>

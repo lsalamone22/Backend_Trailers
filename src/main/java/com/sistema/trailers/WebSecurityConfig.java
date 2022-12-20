@@ -30,13 +30,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.roles("USER")
 				.build();
 		
-		/*UserDetails usuario2 = User
+		UserDetails usuario2 = User
 				.withUsername("admin")
 				.password("$2a$10$nbEeWk104eSdRikNGnK2BuAhvssJV/aBW6tQl0GY5qeia9ciNHnn.")
 				.roles("ADMIN")	
-				.build();*/
+				.build();
 		
-		return new InMemoryUserDetailsManager(usuario1);
+		return new InMemoryUserDetailsManager(usuario1,usuario2);
 	}
 	
 	@Override
@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()//cuando cualquier usuario entre aqui, lo puede hacer cualquiera
 		
-		/*.antMatchers("/admin/peliculas//eliminar").hasRole("ADMIN")//solos los de admin*/
+		.antMatchers("/peliculas/{id}/editar", "/peliculas/{id}/eliminar").hasRole("ADMIN")//solos los de admin
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
